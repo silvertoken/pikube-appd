@@ -1,0 +1,22 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pikube-appd
+  namespace: hip
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      application: pikube-appd
+  template:
+    metadata:
+      labels:
+        application: pikube-appd
+    spec:
+      serviceAccountName: hip-operator
+      containers:
+        - name: pikube-appd
+          image: silvertoken/pikube-appd:0.0.1
